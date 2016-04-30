@@ -6,11 +6,13 @@ import Peg from './components/Peg.jsx';
 import Row from './components/Row.jsx';
 import PegTray from './components/PegTray.jsx';
 
+require('./stylesheets/main.scss');
+
 class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="mastermind-game">
         <Board />
       </div>
     );
@@ -18,4 +20,3 @@ class App extends React.Component {
 }
 
 render(<App/>, document.getElementById('app'));
- 
