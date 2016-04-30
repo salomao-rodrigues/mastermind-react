@@ -10,32 +10,15 @@ class Row extends React.Component {
     this.renderSlots = this.renderSlots.bind(this);
   }
 
-  get style() {
-    return {
-      width: 200,
-      height: 50,
-      borderWidth: 2,
-      borderColor: "black",
-      borderStyle: "solid",
-      backgroundColor: "#D09B88",
-      borderRadius: 10,
-      display: "block"
-    };
-  }
-
   renderSlots() {
     return this.props.slots.map(function (elem, index) {
       if (elem === null) {
         return <PegSlot
           key={index} 
-          width={this.style.width / this.props.slots.length}
-          height={this.style.height}
         />
       }
       return <Peg
         key={index}
-        width={this.style.width / this.props.slots.length}
-        height={this.style.height}
         color={elem}
       /> 
     }, this);
@@ -43,7 +26,7 @@ class Row extends React.Component {
 
   render() {
     return (  
-      <div style={this.style}>
+      <div className={this.props.className}>
         {this.renderSlots()}
       </div>
     );
@@ -51,7 +34,8 @@ class Row extends React.Component {
 }
 
 Row.defaultProps = {
-  slots: [null, null, null, null]
+  slots: [null, null, null, null],
+  className: 'mm-row'
 };
 
 export default Row;

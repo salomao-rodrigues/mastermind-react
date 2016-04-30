@@ -13,7 +13,7 @@ class Secret extends React.Component {
 
   render() {
     return (
-      <Row slots={this.getSlots.call(this)} />
+      <Row className="mm-secret" slots={this.getSlots.call(this)} />
     );
   }
 }

@@ -1,0 +1,29 @@
+.mm-peg {
+  $wrapper-width: ($row-width / $slots-count);
+  $wrapper-height: $row-height;
+  $peg-size: $wrapper-width / 1px * .62;
+  $peg-border: 2px;
+
+  width: $peg-size;
+  height: $peg-size;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  margin: auto;
+
+  border: {
+    width: 2px;
+    color: #000;
+    style: solid;
+    radius: 50%;
+  }
+
+  &-wrapper {
+    width: $wrapper-width;
+    height: $wrapper-height;
+    position: relative;
+    display: inline-block;
+  }
+}

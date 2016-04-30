@@ -38,7 +38,6 @@ class Board extends React.Component {
     rows[this.state.activeRow][this.state.activeSlot] = color;
 
     if (newActiveSlot >= this.props.secretSize) {
-      console.log(rows[this.state.activeRow], this.state.secret);
       solved = JSON.stringify(rows[this.state.activeRow]) === JSON.stringify(this.state.secret);
       if (!solved && (this.state.activeRow === this.props.maxRows - 1)) {
         lost = true;
@@ -79,13 +78,13 @@ class Board extends React.Component {
 
   render() {
     return (
-      <div className="board">
+      <div className="mm-board">
         <Secret slots={this.state.secret} revealed={this.state.solved || this.state.lost} />
         <div className="rows">
           {this.renderRows()}
         </div>
         <br/> <br/>
-        <PegTray onPlay={this.play.bind(this)} width={200} height={50} />
+        <PegTray onPlay={this.play.bind(this)}/>
       </div>
     );
   }

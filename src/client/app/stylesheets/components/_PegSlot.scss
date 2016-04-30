@@ -1,0 +1,41 @@
+.mm-peg-slot {
+  $peg-slot-width: $row-width / $slots-count;
+  $peg-slot-height: $row-height;
+  $inner-size: min($peg-slot-width, $peg-slot-height) * 0.16;
+
+  width: $peg-slot-width;
+  height: $peg-slot-height;
+
+  position: relative;
+  display: inline-block;
+
+  &-inner {
+
+    width: $inner-size;
+    height: $inner-size;
+    left: (($peg-slot-width - $inner-size) / 2);
+    top: (($peg-slot-height - $inner-size) / 2);
+    position: absolute;
+    border-radius: 50%;
+    background-color: black;
+  }
+
+  &-outer {
+    $outer-size: $inner-size * 2.5;
+    $border-width: 2px;
+
+    width: $outer-size;
+    height: $outer-size;
+    left: ((($peg-slot-width - $outer-size) / 2) - $border-width);
+    top: ((($peg-slot-height - $outer-size) / 2) - $border-width);
+    background-color: transparent;
+    position: absolute;
+
+    border: {
+      width: $border-width;
+      color: black;
+      style: solid;
+      radius: 50%;
+    }
+  }
+}

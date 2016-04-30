@@ -14,20 +14,6 @@ class PegTray extends React.Component {
     };
   }
 
-  get style() {
-    return {
-      width: this.props.width,
-      height: this.props.height,
-      borderWidth: 2,
-      borderColor: "black",
-      borderStyle: "solid",
-      backgroundColor: "#D09B88",
-      borderRadius: 10,
-      display: "table-cell",
-      verticalAlign: "middle"
-    };
-  }
-
   onClickEvent(color) {
     this.props.onPlay(color);
   }
@@ -49,7 +35,7 @@ class PegTray extends React.Component {
 
   render() {
     return (
-      <div style={this.style}>
+      <div className="mm-peg-tray">
         {this.renderSlots.call(this, PegTray.colors())}
       </div>
     );
