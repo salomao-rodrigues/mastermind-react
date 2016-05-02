@@ -3,6 +3,7 @@ import React from 'react';
 import Secret from './Secret.jsx';
 import Row from './Row.jsx';
 import PegTray from './PegTray.jsx';
+import Indicator from './Indicator.jsx';
 
 class Board extends React.Component {
   constructor(props) {
@@ -12,22 +13,42 @@ class Board extends React.Component {
       activeSlot: 0,
       activeRow: 0,
       rows: [],
+      results: [],
       secret: this.generateSecret(),
       solved: false,
       lost: false
     };
 
-    this.renderRows = this.renderRows.bind(this);
+    this.renderRows = this.renderCodeRows.bind(this);
   }
 
   isSolved(rows) {
     return JSON.stringify(rows[this.state.activeRow]) === JSON.stringify(this.state.secret);
   }
 
+  getResult(secret, attempt) {
+    let i;
+    let nCorrect = 0;
+    let nExist = 0;
+
+    for (i in secret) {
+      if (attempt[i] === secret[i]) {
+        nCorrect += 1;
+      } else if (attempt.indexOf(secret[i]) > -1) {
+        nExist += 1;
+      }
+    }
+
+    let none = this.props.secretSize - nCorrect - nExist;
+
+    return { nCorrect, nExist, none };
+  }
+
   play(color) {
     const rows = this.state.rows;
     let newActiveSlot = this.state.activeSlot + 1;
     let newActiveRow = this.state.activeRow;
+    let results = this.state.results;
     let solved = false;
     let lost = false;
 
@@ -38,10 +59,13 @@ class Board extends React.Component {
     rows[this.state.activeRow][this.state.activeSlot] = color;
 
     if (newActiveSlot >= this.props.secretSize) {
-      solved = JSON.stringify(rows[this.state.activeRow]) === JSON.stringify(this.state.secret);
-      if (!solved && (this.state.activeRow === this.props.maxRows - 1)) {
-        lost = true;
-      }
+      let result = this.getResult.call(this, this.state.secret, rows[this.state.activeRow]);
+
+      results[this.state.activeRow] = result;
+      solved = (result.nCorrect === this.props.secretSize);
+      //this.isSolved.call(this, rows);
+      lost = (!solved && (this.state.activeRow === this.props.maxRows - 1));
+      
       newActiveSlot = 0;
       newActiveRow = Math.min(this.state.activeRow + 1, this.props.maxRows - 1);
     }
@@ -49,6 +73,7 @@ class Board extends React.Component {
     this.setState({
       activeSlot: newActiveSlot,
       activeRow: newActiveRow,
+      results,
       solved,
       lost
     });
@@ -68,23 +93,24 @@ class Board extends React.Component {
     return [null, null, null, null];
   }
 
-  renderRows() {
+  renderCodeRows() {
     let i;
 
     let rows = [];
     for (i = this.props.maxRows - 1; i >= 0; i -= 1) {
       const slots = this.state.rows[i] || this.getNewRow();
-
-      const rowProps = {
-        key: i,
-        slots
-      };
+      let rowActiveSlot = null;
 
       if (i === this.state.activeRow) {
-        rowProps.activeSlot = this.state.activeSlot;
+        rowActiveSlot = this.state.activeSlot;
       }
 
-      rows.push(<Row {...rowProps} />);
+      rows.push(
+        <div key={i}>
+          <Row slots={slots} activeSlot={rowActiveSlot} />
+          <Indicator result={this.state.results[i]} />
+        </div>
+      );
     }
 
     return rows;
@@ -95,7 +121,7 @@ class Board extends React.Component {
       <div className="mm-board">
         <Secret slots={this.state.secret} revealed={this.state.solved || this.state.lost} />
         <div className="rows">
-          {this.renderRows()}
+          {this.renderCodeRows()}
         </div>
         <br/> <br/>
         <PegTray onPlay={this.play.bind(this)}/>

@@ -1,18 +1,30 @@
 $row-bg: ();
 $row-border: ();
+$bulbs: ();
 
 @import 'default';
 
 @each $theme in $themes {
   &.theme-#{$theme} {
-    .mm-row {
+    .mm-row,
+    .mm-indicator {
       background-color: map-get($row-bg, $theme);
 
       border: {
-        width: map-get($row-border, width);
-        color: map-get($row-border, border);
-        style: map-get($row-border, style);
-        radius: map-get($row-border, radius);
+        width: map-get(map-get($row-border, $theme), width);
+        color: map-get(map-get($row-border, $theme), border);
+        style: map-get(map-get($row-border, $theme), style);
+        radius: map-get(map-get($row-border, $theme), radius);
+      }
+    }
+
+    $theme-bulbs: map-get($bulbs, $theme);
+    @each $bulb in map-keys($theme-bulbs) {
+      $bulb-props: map-get($theme-bulbs, $bulb);
+      .#{$bulb} {
+        @each $prop in map-keys($bulb-props) {
+          #{$prop}: map-get($bulb-props, $prop);
+        }
       }
     }
   }
