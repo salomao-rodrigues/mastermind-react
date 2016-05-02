@@ -5,5 +5,24 @@ $default-border: (
   radius: 10px,
 );
 
+$default-bulbs: (
+  i-none: (
+    background-color: #ccc,
+    width: 45%,
+    height: 45%
+  ),
+  i-exists: (
+    background-color: #f80,
+    width: 65%,
+    height: 65%
+  ),
+  i-correct: (
+    background-color: #6c0,
+    width: 65%,
+    height: 65%
+  )
+);
+
 $row-bg: map-merge($row-bg, (default: #d09b88));
-$row-border: map-merge($row-border, $default-border);
+$row-border: map-merge($row-border, (default: $default-border));
+$bulbs: map-merge($bulbs, (default: $default-bulbs));

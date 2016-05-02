@@ -25,7 +25,7 @@ class Row extends React.Component {
   }
 
   render() {
-    return (  
+    return (
       <div className={this.props.className}>
         {this.renderSlots()}
       </div>
