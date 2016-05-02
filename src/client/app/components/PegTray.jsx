@@ -22,11 +22,8 @@ class PegTray extends React.Component {
     const keys = Object.keys(colors);
 
     return keys.map(function(color, index) {
-      const size = this.props.width / keys.length;
       return <Peg
         key={index}
-        width={size}
-        height={size}
         color={color}
         onClick={this.onClickEvent.bind(this, color)}
       />

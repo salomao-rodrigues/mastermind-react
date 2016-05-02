@@ -2,15 +2,7 @@ $row-width: 200px;
 $row-height: 50px;
 
 .mm-row {
-  border: {
-    width: 2px;
-    color: black;
-    style: solid;
-    radius: 10px;
-  }
-
   width: $row-width;
   height: $row-height;
-  background-color: #D09B88;
   display: block;
 }

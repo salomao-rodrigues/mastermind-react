@@ -17,7 +17,7 @@
     top: (($peg-slot-height - $inner-size) / 2);
     position: absolute;
     border-radius: 50%;
-    background-color: black;
+    background-color: #000;
   }
 
   &-outer {
@@ -33,9 +33,13 @@
 
     border: {
       width: $border-width;
-      color: black;
+      color: #000;
       style: solid;
       radius: 50%;
     }
+  }
+
+  & .active-slot {
+    @include active-slot;
   }
 }

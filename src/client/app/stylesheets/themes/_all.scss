@@ -1,0 +1,19 @@
+$row-bg: ();
+$row-border: ();
+
+@import 'default';
+
+@each $theme in $themes {
+  &.theme-#{$theme} {
+    .mm-row {
+      background-color: map-get($row-bg, $theme);
+
+      border: {
+        width: map-get($row-border, width);
+        color: map-get($row-border, border);
+        style: map-get($row-border, style);
+        radius: map-get($row-border, radius);
+      }
+    }
+  }
+}

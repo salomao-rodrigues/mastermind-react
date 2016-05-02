@@ -6,12 +6,7 @@
 
   width: $peg-size;
   height: $peg-size;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  margin: auto;
+  @include center-absolute;
 
   border: {
     width: 2px;
@@ -25,5 +20,9 @@
     height: $wrapper-height;
     position: relative;
     display: inline-block;
+  }
+
+  & .active-slot {
+    @include active-slot;
   }
 }

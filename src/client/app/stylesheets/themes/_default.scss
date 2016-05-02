@@ -1,0 +1,9 @@
+$default-border: (
+  width: 2px,
+  color: #000,
+  style: solid,
+  radius: 10px,
+);
+
+$row-bg: map-merge($row-bg, (default: #d09b88));
+$row-border: map-merge($row-border, $default-border);
