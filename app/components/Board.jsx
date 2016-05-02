@@ -20,8 +20,8 @@ class Board extends React.Component {
     this.renderRows = this.renderRows.bind(this);
   }
 
-  getNewRow() {
-    return [null, null, null, null];
+  isSolved(rows) {
+    return JSON.stringify(rows[this.state.activeRow]) === JSON.stringify(this.state.secret);
   }
 
   play(color) {
@@ -64,13 +64,27 @@ class Board extends React.Component {
     ]
   }
 
+  getNewRow() {
+    return [null, null, null, null];
+  }
+
   renderRows() {
     let i;
 
     let rows = [];
     for (i = this.props.maxRows - 1; i >= 0; i -= 1) {
-      const slots = this.state.rows[i] || this.getNewRow(); 
-      rows.push(<Row key={i} slots={slots} />);
+      const slots = this.state.rows[i] || this.getNewRow();
+
+      const rowProps = {
+        key: i,
+        slots
+      };
+
+      if (i === this.state.activeRow) {
+        rowProps.activeSlot = this.state.activeSlot;
+      }
+
+      rows.push(<Row {...rowProps} />);
     }
 
     return rows;
