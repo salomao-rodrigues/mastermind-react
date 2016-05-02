@@ -12,7 +12,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div className="mastermind-game">
+      <div className="mastermind-game theme-default">
         <Board />
       </div>
     );
