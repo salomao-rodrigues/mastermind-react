@@ -39,9 +39,9 @@ class Board extends React.Component {
       }
     }
 
-    let none = this.props.secretSize - nCorrect - nExist;
+    let nIncorrect = this.props.secretSize - nCorrect - nExist;
 
-    return { nCorrect, nExist, none };
+    return { nCorrect, nExist, nIncorrect };
   }
 
   play(color) {
