@@ -21,7 +21,7 @@ class PegTray extends React.Component {
   renderSlots(colors) {
     const keys = Object.keys(colors);
 
-    return keys.map(function(color, index) {
+    return keys.map((color, index) => {
       return <Peg
         key={index}
         color={color}

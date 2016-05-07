@@ -2,13 +2,13 @@ import React from 'react';
 
 class Indicator extends React.Component {
   getBulbs(result) {
-    let bulbs = [].concat(
-      Array(result.nCorrect).fill(Indicator.Results.CORRECT),
-      Array(result.nExist).fill(Indicator.Results.EXISTS),
-      Array(result.none).fill(Indicator.Results.NONE)
-    );
+    let bulbs = [
+      ...Array(result.nCorrect).fill(Indicator.Results.CORRECT),
+      ...Array(result.nExist).fill(Indicator.Results.EXISTS),
+      ...Array(result.none).fill(Indicator.Results.NONE)
+    ];
 
-    return bulbs.map(function (value, index) {
+    return bulbs.map((value, index) => {
       return (
         <div key={index} className="bulb">
           <span className={value} />

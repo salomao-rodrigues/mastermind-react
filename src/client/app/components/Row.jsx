@@ -11,7 +11,7 @@ class Row extends React.Component {
   }
 
   renderSlots() {
-    return this.props.slots.map(function (elem, index) {
+    return this.props.slots.map((elem, index) => {
       const pegPros = {
         key: index,
         active: (this.props.activeSlot === index)
