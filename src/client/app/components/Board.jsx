@@ -80,13 +80,16 @@ class Board extends React.Component {
   }
 
   generateSecret() {
-    let colors = PegTray.colors();
-    return [
-      colors.blue,
-      colors.green,
-      colors.red,
-      colors.yellow
-    ]
+    let i;
+    const colors = Object.keys(PegTray.colors());
+    const code = [];
+
+    for (i = 0; i < this.props.secretSize; i += 1) {
+      const randomIndex = Math.floor(Math.random() * colors.length);
+      code.push(colors.splice(randomIndex, 1)[0]);
+    }
+
+    return code;
   }
 
   getNewRow() {
