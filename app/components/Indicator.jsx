@@ -5,7 +5,7 @@ class Indicator extends React.Component {
     let bulbs = [
       ...Array(result.nCorrect).fill(Indicator.Results.CORRECT),
       ...Array(result.nExist).fill(Indicator.Results.EXISTS),
-      ...Array(result.none).fill(Indicator.Results.NONE)
+      ...Array(result.nIncorrect).fill(Indicator.Results.INCORRECT)
     ];
 
     return bulbs.map((value, index) => {
@@ -29,14 +29,14 @@ class Indicator extends React.Component {
 Indicator.Results = {
   CORRECT: 'i-correct',
   EXISTS: 'i-exists',
-  NONE: 'i-none'
+  INCORRECT: 'i-incorrect'
 };
 
 Indicator.defaultProps = {
   result: {
     nCorrect: 0,
     nExist: 0,
-    none: 4
+    nIncorrect: 4
   }
 };
 
