@@ -1,31 +1,20 @@
 import React from 'react';
+import { play } from '../actions';
 
 import Peg from './Peg.jsx';
 
 class PegTray extends React.Component {
-  static colors() {
-    return {
-      yellow: "yellow",
-      orange: "orange",
-      red: "red",
-      purple: "purple",
-      blue: "blue",
-      green: "green"
-    };
-  }
-
-  onClickEvent(color) {
-    this.props.onPlay(color);
+  onClickEvent(colorIndex) {
+    const action = play(colorIndex);
+    this.props.onPegClick(action);
   }
 
   renderSlots(colors) {
-    const keys = Object.keys(colors);
-
-    return keys.map((color, index) => {
+    return colors.map((color, index) => {
       return <Peg
         key={index}
         color={color}
-        onClick={this.onClickEvent.bind(this, color)}
+        onClick={this.onClickEvent.bind(this, index)}
       />
     }, this);
   }
@@ -33,7 +22,7 @@ class PegTray extends React.Component {
   render() {
     return (
       <div className="mm-peg-tray">
-        {this.renderSlots.call(this, PegTray.colors())}
+        {this.renderSlots.call(this, this.props.colors)}
       </div>
     );
   }

@@ -11,16 +11,16 @@ class Row extends React.Component {
   }
 
   renderSlots() {
-    return this.props.slots.map((elem, index) => {
-      const pegPros = {
+    return this.props.slots.map((colorKey, index) => {
+      const pegProps = {
         key: index,
         active: (this.props.activeSlot === index)
       }
 
-      if (elem === null) {
-        return <PegSlot {...pegPros} />
+      if (colorKey === null) {
+        return <PegSlot {...pegProps} />
       }
-      return <Peg {...pegPros} color={elem} /> 
+      return <Peg {...pegProps} color={this.props.colors[colorKey]} /> 
     }, this);
   }
 

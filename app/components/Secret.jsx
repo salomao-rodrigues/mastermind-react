@@ -7,13 +7,14 @@ class Secret extends React.Component {
     if (this.props.revealed) {
       return this.props.slots;
     }
-
-    return [null, null, null, null];
   }
 
   render() {
     return (
-      <Row className="mm-secret" slots={this.getSlots.call(this)} />
+      <Row
+        className="mm-secret"
+        colors={this.props.colors}
+        slots={this.getSlots.call(this)} />
     );
   }
 }
