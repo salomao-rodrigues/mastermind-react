@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Bulb from './Bulb.jsx';
+
 class Indicator extends React.Component {
   getBulbs(result) {
-    let bulbs = [
+    const bulbs = [
       ...Array(result.nCorrect).fill(Indicator.Results.CORRECT),
       ...Array(result.nExist).fill(Indicator.Results.EXISTS),
       ...Array(result.nIncorrect).fill(Indicator.Results.INCORRECT)
@@ -10,9 +12,7 @@ class Indicator extends React.Component {
 
     return bulbs.map((value, index) => {
       return (
-        <div key={index} className="bulb">
-          <span className={value} />
-        </div>
+        <Bulb key={index} type={value} />
       );
     });
   }
