@@ -1,9 +1,3 @@
 # Mastermind Web
 
-Mastermind game created in ReactJS
-
-## Goals
- - Use Redux to abstract game logic out of react components
- - Sass themes structure is messy, improve.
-
-Readme to be updated
+Mastermind game created with [React](https://github.com/facebook/react "React") and [Redux](https://github.com/reactjs/redux "Redux").
