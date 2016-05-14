@@ -8,11 +8,12 @@ import * as ActionTypes from './constants/ActionTypes';
  * Given a secret length N, returns an array of N random numbers [0..N-1]
  * 
  * @param {int} secretSize
+ * @param {int} availableColors
  *
  * @return {int[]}
  */
-const generateSecret = (secretSize) => {
-  const bagOfNumbers = Object.keys(Array(secretSize).fill(null));
+const generateSecret = (secretSize, availableColors) => {
+  const bagOfNumbers = Object.keys(Array(availableColors  ).fill(null));
   const code = [];
 
   while (0 < secretSize--) {
@@ -28,7 +29,7 @@ const initialState = {
   activeRow: 0,
   rows: [],
   results: [],
-  secret: generateSecret(config.secretSize),
+  secret: generateSecret(config.secretSize, config.availableColors),
   solved: false,
   lost: false
 };
