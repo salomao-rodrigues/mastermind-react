@@ -4,30 +4,24 @@ import PegSlot from './PegSlot.jsx';
 import Peg from './Peg.jsx';
 
 class Row extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.renderSlots = this.renderSlots.bind(this);
-  }
-
   renderSlots() {
-    return this.props.slots.map((colorKey, index) => {
+    return this.props.slots.map((color, index) => {
       const pegProps = {
         key: index,
         active: (this.props.activeSlot === index)
       }
 
-      if (colorKey === null) {
+      if (color === null) {
         return <PegSlot {...pegProps} />
       }
-      return <Peg {...pegProps} color={this.props.colors[colorKey]} /> 
+      return <Peg {...pegProps} color={color} /> 
     }, this);
   }
 
   render() {
     return (
       <div className={this.props.className}>
-        {this.renderSlots()}
+        {this.renderSlots.call(this)}
       </div>
     );
   }

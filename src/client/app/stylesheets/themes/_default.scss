@@ -23,6 +23,16 @@ $default-bulbs: (
   )
 );
 
+$default-colors: (
+  zero: #ff0,
+  one: #ffa500,
+  two: #f00,
+  three: #800080,
+  four: #00f,
+  five: #008000
+);
+
 $row-bg: map-merge($row-bg, (default: #d09b88));
 $row-border: map-merge($row-border, (default: $default-border));
 $bulbs: map-merge($bulbs, (default: $default-bulbs));
+$colors: map-merge($colors, (default: $default-colors));

@@ -4,25 +4,24 @@ import { play } from '../actions';
 import Peg from './Peg.jsx';
 
 class PegTray extends React.Component {
-  onClickEvent(colorIndex) {
-    const action = play(colorIndex);
-    this.props.onPegClick(action);
-  }
+  renderSlots(maxColors, dispatcher) {
+    const slots = [];
+    let i;
+    
+    for (i = 0; i < maxColors; i+= 1) {
+      slots.push(<Peg key={i}
+        color={i}
+        onClick={dispatcher.bind(null, play(i))}
+      />);
+    }
 
-  renderSlots(colors) {
-    return colors.map((color, index) => {
-      return <Peg
-        key={index}
-        color={color}
-        onClick={this.onClickEvent.bind(this, index)}
-      />
-    }, this);
+    return slots;
   }
 
   render() {
     return (
       <div className="mm-peg-tray">
-        {this.renderSlots.call(this, this.props.colors)}
+        {this.renderSlots(this.props.maxColors, this.props.dispatcher)}
       </div>
     );
   }

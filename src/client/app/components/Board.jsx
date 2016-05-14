@@ -18,7 +18,7 @@ class Board extends React.Component {
 
       rows.push(
         <div key={i}>
-          <Row slots={slots} colors={this.props.colors} activeSlot={rowActiveSlot} />
+          <Row slots={slots} activeSlot={rowActiveSlot} />
           <Indicator result={this.props.results[i]} />
         </div>
       );

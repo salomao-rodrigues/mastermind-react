@@ -1,6 +1,7 @@
 $row-bg: ();
 $row-border: ();
 $bulbs: ();
+$colors: ();
 
 @import 'default';
 
@@ -21,10 +22,18 @@ $bulbs: ();
     $theme-bulbs: map-get($bulbs, $theme);
     @each $bulb in map-keys($theme-bulbs) {
       $bulb-props: map-get($theme-bulbs, $bulb);
+
       & .#{$bulb} {
         @each $prop in map-keys($bulb-props) {
           #{$prop}: map-get($bulb-props, $prop);
         }
+      }
+    }
+
+    $theme-colors: map-get($colors, $theme);
+    @each $color in map-keys($theme-colors) {
+      .color.#{$color} {
+        background-color: map-get($theme-colors, $color);
       }
     }
   }
