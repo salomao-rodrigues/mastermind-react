@@ -5,32 +5,30 @@ import * as ActionTypes from './constants/ActionTypes';
 /**
  * Create a secret mastermind code
  * 
- * Given an array of colors, returns an array of a specified length containing
- * random indexes of the colors array with no repetitions
+ * Given a secret length N, returns an array of N random numbers [0..N-1]
  * 
- * @param {int[]} colors
- * @param {int}   secretSize
+ * @param {int} secretSize
  *
  * @return {int[]}
  */
-const generateSecret = (colors, secretSize) => {
-  const keys = Object.keys(colors, secretSize);
+const generateSecret = (secretSize) => {
+  const bagOfNumbers = Object.keys(Array(secretSize).fill(null));
   const code = [];
 
   while (0 < secretSize--) {
-    const randomIndex = Math.floor(Math.random() * keys.length);
-    code.push(+keys.splice(randomIndex, 1)[0]);
+    const randomIndex = Math.floor(Math.random() * bagOfNumbers.length);
+    code.push(+bagOfNumbers.splice(randomIndex, 1)[0]);
   }
 
   return code;
 }
 
-const iniState = {
+const initialState = {
   activeSlot: 0,
   activeRow: 0,
   rows: [],
   results: [],
-  secret: generateSecret(config.colors, config.secretSize),
+  secret: generateSecret(config.secretSize),
   solved: false,
   lost: false
 };
@@ -98,7 +96,7 @@ const play = (state, action) => {
  *
  * @return {object}
  */
-const mastermind = (state = iniState, action) => {
+const mastermind = (state = initialState, action) => {
   if (action.type === ActionTypes.PLAY) {
     return play(state, action);
   }

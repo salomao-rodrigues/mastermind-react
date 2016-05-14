@@ -15,10 +15,10 @@ class App extends React.Component {
     const state = Mastermind.getState();
     return (
       <div className="mastermind-game theme-default">
-        <Secret slots={state.secret} colors={config.colors} revealed={state.solved || state.lost} />
-        <Board {...state} colors={config.colors} maxRows={config.maxRows} />
+        <Secret slots={state.secret} revealed={state.solved || state.lost} />
+        <Board {...state} maxRows={config.maxRows} />
         <br/><br/>
-        <PegTray onPegClick={Mastermind.dispatch} colors={config.colors} action="PLAY" />
+        <PegTray dispatcher={Mastermind.dispatch} maxColors={config.availableColors} />
       </div>
     );
   }
