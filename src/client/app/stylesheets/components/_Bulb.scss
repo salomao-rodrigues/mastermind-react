@@ -1,0 +1,7 @@
+.bulb span {
+  @include center-absolute;
+
+  border-radius: 50%;
+  line-height: 100%;
+  text-align: center;
+}
