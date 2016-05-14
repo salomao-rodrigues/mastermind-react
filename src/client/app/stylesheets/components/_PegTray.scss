@@ -1,11 +1,13 @@
 .mm-peg-tray {
   @extend .mm-row;
+  $tray-width: $row-width + $row-height;
 
+  width: $tray-width;
   display: table-cell;
   vertical-align: middle;
 
   .mm-peg-wrapper {
-    width: ($row-width / $number-of-colors);
+    width: ($tray-width / $number-of-colors);
     height: $row-height;
     position: relative;
     display: inline-block;
