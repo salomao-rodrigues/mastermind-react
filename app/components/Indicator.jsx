@@ -1,13 +1,14 @@
 import React from 'react';
 
+import BulbTypes from '../constants/BulbTypes';
 import Bulb from './Bulb.jsx';
 
 class Indicator extends React.Component {
   getBulbs(result) {
     const bulbs = [
-      ...Array(result.nCorrect).fill(Indicator.Results.CORRECT),
-      ...Array(result.nExist).fill(Indicator.Results.EXISTS),
-      ...Array(result.nIncorrect).fill(Indicator.Results.INCORRECT)
+      ...Array(result.nCorrect).fill(BulbTypes.CORRECT),
+      ...Array(result.nExist).fill(BulbTypes.EXISTS),
+      ...Array(result.nIncorrect).fill(BulbTypes.INCORRECT)
     ];
 
     return bulbs.map((value, index) => {
@@ -25,12 +26,6 @@ class Indicator extends React.Component {
     );
   }
 }
-
-Indicator.Results = {
-  CORRECT: 'i-correct',
-  EXISTS: 'i-exists',
-  INCORRECT: 'i-incorrect'
-};
 
 Indicator.defaultProps = {
   result: {
