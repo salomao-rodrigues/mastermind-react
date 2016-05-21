@@ -25,6 +25,7 @@ const generateSecret = (secretSize, availableColors) => {
 }
 
 const initialState = {
+  config: Object.assign({}, config),
   activeSlot: 0,
   activeRow: 0,
   rows: [],
@@ -68,15 +69,15 @@ const play = (state, action) => {
 
   rows[state.activeRow][state.activeSlot] = action.color;
 
-  if (newActiveSlot >= config.secretSize) {
+  if (newActiveSlot >= state.config.secretSize) {
     let result = getResult(state.secret, rows[state.activeRow]);
 
     results[state.activeRow] = result;
-    solved = (result.nCorrect === config.secretSize);
-    lost = (!solved && (state.activeRow === config.maxRows - 1));
+    solved = (result.nCorrect === state.config.secretSize);
+    lost = (!solved && (state.activeRow === state.config.maxRows - 1));
 
     newActiveSlot = 0;
-    newActiveRow = Math.min(state.activeRow + 1, config.maxRows - 1);
+    newActiveRow = Math.min(state.activeRow + 1, state.config.maxRows - 1);
   }
 
   return Object.assign({}, state, {
