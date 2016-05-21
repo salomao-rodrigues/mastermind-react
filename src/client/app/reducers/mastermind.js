@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
-import config from './config';
-import * as ActionTypes from './constants/ActionTypes';
+import config from '../config';
+import * as ActionTypes from '../constants/ActionTypes';
 
 /**
  * Create a secret mastermind code
@@ -97,14 +97,10 @@ const play = (state, action) => {
  *
  * @return {object}
  */
-const mastermind = (state = initialState, action) => {
+export default function mastermind(state = initialState, action) {
   if (action.type === ActionTypes.PLAY) {
     return play(state, action);
   }
 
   return state;
 }
-
-const store = createStore(mastermind);
-
-export default store;
