@@ -25,7 +25,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    game: state.mastermind;
+    game: state.mastermind
   }
 }
 
