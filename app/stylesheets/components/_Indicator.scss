@@ -5,11 +5,4 @@
   height: $i-width;
   position: relative;
   display: inline-block;
-
-  & > div {
-    width: 50%;
-    height: 50%;
-    display: inline-block;
-    position: relative;
-  }
 }

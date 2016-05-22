@@ -2,3 +2,11 @@ $themes: ('default');
 
 $slots-count: 4 !default;
 $number-of-colors: 6 !default;
+
+$row-width: 200px !default;
+$row-height: 50px !default;
+
+$caption-width: $row-width !default;
+$caption-height: $row-height !default;
+
+$main-margin-bottom: 15px !default; 

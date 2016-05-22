@@ -3,8 +3,8 @@
   $tray-width: $row-width + $row-height;
 
   width: $tray-width;
-  display: table-cell;
   vertical-align: middle;
+  margin-bottom: $main-margin-bottom;
 
   .mm-peg-wrapper {
     width: ($tray-width / $number-of-colors);
