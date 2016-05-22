@@ -7,18 +7,16 @@ import Board from '../components/Board.jsx';
 import PegTray from '../components/PegTray.jsx';
 import * as GameActions from '../actions'
 
-import config from '../config.js';
-
 class App extends React.Component {
   render() {
-    const { game } = this.props;
+    const { game, actions } = this.props;
     return (
       <div className="mastermind-game theme-default">
         <Secret slots={game.secret} revealed={game.solved || game.lost} />
         <br/><br/>
-        <Board {...game} maxRows={config.maxRows} />
+        <Board {...game} maxRows={game.config.maxRows} />
         <br/><br/>
-        <PegTray maxColors={config.availableColors} />
+        <PegTray maxColors={game.config.availableColors} {...actions} />
       </div>
     );
   }
@@ -31,7 +29,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log(bindActionCreators(GameActions, dispatch));
   return {
     actions: bindActionCreators(GameActions, dispatch)
   };
