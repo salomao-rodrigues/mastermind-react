@@ -1,0 +1,25 @@
+.mm-caption {
+  $bulb-size: ($caption-height / 2);
+
+  position: relative;
+  width: $caption-width;
+  height: $caption-height;
+
+  .caption-line {
+    height: $bulb-size;
+  }
+
+  .bulb {
+    width: $bulb-size;
+    height: $bulb-size;
+    float: left;
+
+    span {
+      border: 1px #000 solid;
+    }
+  }
+
+  span {
+    line-height: $bulb-size;
+  }
+}

@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import Secret from '../components/Secret.jsx';
 import Board from '../components/Board.jsx';
 import PegTray from '../components/PegTray.jsx';
+import Caption from '../components/Caption.jsx';
+
 import * as GameActions from '../actions'
 
 class App extends React.Component {
@@ -13,10 +15,9 @@ class App extends React.Component {
     return (
       <div className="mastermind-game theme-default">
         <Secret slots={game.secret} revealed={game.solved || game.lost} />
-        <br/><br/>
         <Board {...game} maxRows={game.config.maxRows} />
-        <br/><br/>
         <PegTray maxColors={game.config.availableColors} {...actions} />
+        <Caption />
       </div>
     );
   }
