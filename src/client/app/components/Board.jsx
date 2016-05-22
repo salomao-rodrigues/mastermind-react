@@ -4,8 +4,8 @@ import Row from './Row.jsx';
 import Indicator from './Indicator.jsx';
 
 class Board extends React.Component {
-  renderCodeRows() {
-    const {maxRows, rows, secret, activeRow, activeSlot, results} = this.props;
+  renderCodeRows(props) {
+    const {maxRows, rows, secret, activeRow, activeSlot, results} = props;
     let i, boardRows = [];
 
     for (i = maxRows - 1; i >= 0; i -= 1) {
@@ -13,8 +13,12 @@ class Board extends React.Component {
 
       boardRows.push(
         <div key={i}>
-          <Row slots={slots} activeSlot={i === activeRow && activeSlot} />
-          <Indicator result={results[i]} />
+          <Row
+            slots={slots}
+            length={secret.length}
+            activeSlot={i === activeRow && activeSlot}
+          />
+          <Indicator result={results[i]} length={secret.length} />
         </div>
       );
     }
@@ -26,7 +30,7 @@ class Board extends React.Component {
     return (
       <div className="mm-board">
         <div className="rows">
-          {this.renderCodeRows.call(this)}
+          {this.renderCodeRows(this.props)}
         </div>
       </div>
     );

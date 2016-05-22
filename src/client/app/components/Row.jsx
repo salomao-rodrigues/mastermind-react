@@ -4,31 +4,36 @@ import PegSlot from './PegSlot.jsx';
 import Peg from './Peg.jsx';
 
 class Row extends React.Component {
-  renderSlots() {
-    return this.props.slots.map((color, index) => {
+  /**
+   * Loops through slots and returns an array of Peg/PegSlot
+   *
+   * @return {React.Component[]} The Pegs PegSlots
+   */
+  renderSlots(props) {
+    const { activeSlot, className, length } = props;
+    const slots = props.slots || Array(length).fill(null);
+
+    return slots.map((color, index) => {
       const pegProps = {
         key: index,
-        active: (this.props.activeSlot === index)
+        active: (activeSlot === index)
       }
 
-      if (color === null) {
-        return <PegSlot {...pegProps} />
-      }
-      return <Peg {...pegProps} color={color} /> 
-    }, this);
+      return (color === null) ? <PegSlot {...pegProps} />
+                              : <Peg {...pegProps} color={color} />;
+    });
   }
 
   render() {
     return (
       <div className={this.props.className}>
-        {this.renderSlots.call(this)}
+        {this.renderSlots(this.props)}
       </div>
     );
   }
 }
 
 Row.defaultProps = {
-  slots: [null, null, null, null],
   className: 'mm-row'
 };
 

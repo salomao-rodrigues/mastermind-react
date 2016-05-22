@@ -35,7 +35,7 @@ const initialState = {
   lost: false
 };
 
-const getNewRow = () => [null, null, null, null];
+const getNewRow = (length) => Array(length).fill(null);
 
 const getResult = (secret, attempt) => {
   let i;
@@ -64,7 +64,7 @@ const play = (state, action) => {
   let lost = false;
 
   if (!rows[state.activeRow]) {
-    rows[state.activeRow] = getNewRow();
+    rows[state.activeRow] = getNewRow(state.config.secretSize);
   }
 
   rows[state.activeRow][state.activeSlot] = action.color;
