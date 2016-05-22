@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import mastermind from './mastermind'
+import { combineReducers } from 'redux';
+import mastermind from './mastermind';
 
 const rootReducer = combineReducers({
   mastermind
 })
 
-export default rootReducer
+export default rootReducer;

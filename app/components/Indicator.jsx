@@ -4,6 +4,17 @@ import BulbTypes from '../constants/BulbTypes';
 import Bulb from './Bulb.jsx';
 
 class Indicator extends React.Component {
+  /**
+   * Returns default Result object
+   *
+   * @param  {int} length
+   *
+   * @return {object}
+   */
+  getDefaultResult(length) {
+    return { nCorrect: 0, nExist: 0, nIncorrect: length };
+  }
+
   getBulbs(result) {
     const bulbs = [
       ...Array(result.nCorrect).fill(BulbTypes.CORRECT),
@@ -19,20 +30,14 @@ class Indicator extends React.Component {
   }
 
   render() {
+    const result = this.props.result
+                   || this.getDefaultResult(this.props.length);
     return (
       <div className="mm-indicator">
-        {this.getBulbs(this.props.result)}
+        {this.getBulbs(result)}
       </div>
     );
   }
 }
-
-Indicator.defaultProps = {
-  result: {
-    nCorrect: 0,
-    nExist: 0,
-    nIncorrect: 4
-  }
-};
 
 export default Indicator;
