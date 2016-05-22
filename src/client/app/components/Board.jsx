@@ -5,26 +5,21 @@ import Indicator from './Indicator.jsx';
 
 class Board extends React.Component {
   renderCodeRows() {
-    let i;
+    const {maxRows, rows, secret, activeRow, activeSlot, results} = this.props;
+    let i, boardRows = [];
 
-    let rows = [];
-    for (i = this.props.maxRows - 1; i >= 0; i -= 1) {
-      const slots = this.props.rows[i] || Array(this.props.secret.length).fill(null);
-      let rowActiveSlot = null;
+    for (i = maxRows - 1; i >= 0; i -= 1) {
+      const slots = rows[i];
 
-      if (i === this.props.activeRow) {
-        rowActiveSlot = this.props.activeSlot;
-      }
-
-      rows.push(
+      boardRows.push(
         <div key={i}>
-          <Row slots={slots} activeSlot={rowActiveSlot} />
-          <Indicator result={this.props.results[i]} />
+          <Row slots={slots} activeSlot={i === activeRow && activeSlot} />
+          <Indicator result={results[i]} />
         </div>
       );
     }
 
-    return rows;
+    return boardRows;
   }
 
   render() {
