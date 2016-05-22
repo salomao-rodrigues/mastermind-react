@@ -3,18 +3,15 @@ import React from 'react';
 import Colors from '../constants/Colors';
 
 class Peg extends React.Component {
-
-  renderActive() {
-    if (this.props.active === true) {
-      return <div className="active-slot" />;
-    }
-  }
-
   render() {
+    const { color, onClickHandler, active } = this.props;
     return (
       <div className="mm-peg-wrapper">
-        {this.renderActive()}
-        <div className={"mm-peg color " + Colors[this.props.color]} onClick={this.props.onClick} />
+        {active && <div className="active-slot" />}
+        <div
+          className={"mm-peg color " + Colors[color]}
+          onClick={onClickHandler && (() => onClickHandler(color))}
+        />
       </div>
     );
   }
