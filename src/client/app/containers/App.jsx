@@ -15,8 +15,8 @@ class App extends React.Component {
     return (
       <div className="mastermind-game theme-default">
         <Secret slots={game.secret} revealed={game.solved || game.lost} />
-        <Board {...game} maxRows={game.config.maxRows} />
         <PegTray maxColors={game.config.availableColors} {...actions} />
+        <Board {...game} />
         <Caption />
       </div>
     );
