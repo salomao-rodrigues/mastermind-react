@@ -31,7 +31,7 @@ class App extends React.Component {
       <div className="mastermind-game theme-default">
         <Secret slots={game.secret} revealed={revealed} />
         <Board {...game} />
-        <PegTray maxColors={game.config.availableColors} {...actions} />
+        <PegTray maxColors={game.config.availableColors} {...(revealed || actions)} />
         {revealed && this.renderModal(game.solved)}
         <Caption />
       </div>
