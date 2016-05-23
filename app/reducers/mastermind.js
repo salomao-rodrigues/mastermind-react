@@ -70,7 +70,7 @@ const play = (state, action) => {
   rows[state.activeRow][state.activeSlot] = action.color;
 
   if (newActiveSlot >= state.config.secretSize) {
-    let result = getResult(state.secret, rows[state.activeRow]);
+    const result = getResult(state.secret, rows[state.activeRow]);
 
     results[state.activeRow] = result;
     solved = (result.nCorrect === state.config.secretSize);
@@ -81,7 +81,7 @@ const play = (state, action) => {
   }
 
   return Object.assign({}, state, {
-    activeSlot: newActiveSlot,
+    activeSlot: !(solved || lost) && newActiveSlot,
     activeRow: newActiveRow,
     rows,
     results,
