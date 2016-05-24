@@ -1,5 +1,4 @@
 import React from 'react';
-import { play } from '../actions';
 
 import Peg from './Peg.jsx';
 

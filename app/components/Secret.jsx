@@ -4,7 +4,7 @@ import Row from './Row.jsx';
 
 class Secret extends React.Component {
   render() {
-    const { revealed, slots, colors, length } = this.props;
+    const { revealed, slots, colors } = this.props;
     return (
       <Row
         className="mm-secret"

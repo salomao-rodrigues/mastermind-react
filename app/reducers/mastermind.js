@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 import config from '../config';
 import * as ActionTypes from '../constants/ActionTypes';
 
