@@ -23,15 +23,24 @@ const generateSecret = (secretSize, availableColors) => {
   return code;
 }
 
-const initialState = {
-  config: Object.assign({}, config),
-  activeSlot: 0,
-  activeRow: 0,
-  rows: [],
-  results: [],
-  secret: generateSecret(config.secretSize, config.availableColors),
-  solved: false,
-  lost: false
+/**
+ * Generate new game state with new random secret code
+ *
+ * @param  {object} config
+ *
+ * @return {object}
+ */
+const getNewGameState = (config) => {
+  return {
+    config: Object.assign({}, config),
+    activeSlot: 0,
+    activeRow: 0,
+    rows: [],
+    results: [],
+    secret: generateSecret(config.secretSize, config.availableColors),
+    solved: false,
+    lost: false
+  };
 };
 
 const getNewRow = (length) => Array(length).fill(null);
@@ -97,13 +106,13 @@ const play = (state, action) => {
  *
  * @return {object}
  */
-export default function mastermind(state = initialState, action) {
+export default function mastermind(state = getNewGameState(config), action) {
   switch (action.type) {
     case ActionTypes.PLAY:
       return play(state, action);
 
     case ActionTypes.NEW_GAME:
-      return initialState;
+      return getNewGameState(config);
 
     default:
       return state;
