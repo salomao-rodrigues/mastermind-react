@@ -61,7 +61,7 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _configureStore = __webpack_require__(/*! ./store/configureStore */ 230);
+	var _configureStore = __webpack_require__(/*! ./store/configureStore */ 231);
 	
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 	
@@ -22664,23 +22664,23 @@
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _PegTray = __webpack_require__(/*! ../components/PegTray.jsx */ 201);
+	var _PegTray = __webpack_require__(/*! ../components/PegTray.jsx */ 204);
 	
 	var _PegTray2 = _interopRequireDefault(_PegTray);
 	
-	var _Caption = __webpack_require__(/*! ../components/Caption.jsx */ 202);
+	var _Caption = __webpack_require__(/*! ../components/Caption.jsx */ 205);
 	
 	var _Caption2 = _interopRequireDefault(_Caption);
 	
-	var _SolvedModal = __webpack_require__(/*! ../components/modals/SolvedModal.jsx */ 205);
+	var _SolvedModal = __webpack_require__(/*! ../components/modals/SolvedModal.jsx */ 206);
 	
 	var _SolvedModal2 = _interopRequireDefault(_SolvedModal);
 	
-	var _LostModal = __webpack_require__(/*! ../components/modals/LostModal.jsx */ 227);
+	var _LostModal = __webpack_require__(/*! ../components/modals/LostModal.jsx */ 228);
 	
 	var _LostModal2 = _interopRequireDefault(_LostModal);
 	
-	var _actions = __webpack_require__(/*! ../actions */ 228);
+	var _actions = __webpack_require__(/*! ../actions */ 229);
 	
 	var GameActions = _interopRequireWildcard(_actions);
 	
@@ -22730,6 +22730,11 @@
 	        _react2.default.createElement(_Secret2.default, { slots: game.secret, revealed: revealed }),
 	        _react2.default.createElement(_Board2.default, game),
 	        _react2.default.createElement(_PegTray2.default, _extends({ maxColors: game.config.availableColors }, revealed || actions)),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: actions.newGame },
+	          'New game'
+	        ),
 	        revealed && this.renderModal(game.solved),
 	        _react2.default.createElement(_Caption2.default, null)
 	      );
@@ -22940,19 +22945,12 @@
 	  }
 	
 	  _createClass(PegSlot, [{
-	    key: "renderActive",
-	    value: function renderActive() {
-	      if (this.props.active === true) {
-	        return _react2.default.createElement("div", { className: "active-slot" });
-	      }
-	    }
-	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "mm-peg-slot" },
-	        this.renderActive(),
+	        this.props.active && _react2.default.createElement("div", { className: "active-slot" }),
 	        _react2.default.createElement("div", { className: "mm-peg-slot-outer" }),
 	        _react2.default.createElement("div", { className: "mm-peg-slot-inner" })
 	      );
@@ -23072,7 +23070,7 @@
 	
 	var _Row2 = _interopRequireDefault(_Row);
 	
-	var _Indicator = __webpack_require__(/*! ./Indicator.jsx */ 238);
+	var _Indicator = __webpack_require__(/*! ./Indicator.jsx */ 201);
 	
 	var _Indicator2 = _interopRequireDefault(_Indicator);
 	
@@ -23095,6 +23093,14 @@
 	
 	  _createClass(Board, [{
 	    key: 'renderCodeRows',
+	
+	    /**
+	     * Loop through rows and renders them together with Indicators
+	     *
+	     * @param  {object} props
+	     *
+	     * @return {React.Component[]}
+	     */
 	    value: function renderCodeRows(props) {
 	      var config = props.config;
 	      var rows = props.rows;
@@ -23145,6 +23151,172 @@
 
 /***/ },
 /* 201 */
+/*!*************************************************!*\
+  !*** ./src/client/app/components/Indicator.jsx ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _BulbTypes = __webpack_require__(/*! ../constants/BulbTypes */ 202);
+	
+	var _BulbTypes2 = _interopRequireDefault(_BulbTypes);
+	
+	var _Bulb = __webpack_require__(/*! ./Bulb.jsx */ 203);
+	
+	var _Bulb2 = _interopRequireDefault(_Bulb);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Indicator = function (_React$Component) {
+	  _inherits(Indicator, _React$Component);
+	
+	  function Indicator() {
+	    _classCallCheck(this, Indicator);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Indicator).apply(this, arguments));
+	  }
+	
+	  _createClass(Indicator, [{
+	    key: 'getDefaultResult',
+	
+	    /**
+	     * Returns default Result object
+	     *
+	     * @param  {int} length
+	     *
+	     * @return {object}
+	     */
+	    value: function getDefaultResult(length) {
+	      return { nCorrect: 0, nExist: 0, nIncorrect: length };
+	    }
+	
+	    /**
+	     * Retrieves Bulbs to be displayed in Indicator
+	     *
+	     * @param  {object} result Describes the result of a play
+	     *
+	     * @return {React.Component[]}
+	     */
+	
+	  }, {
+	    key: 'getBulbs',
+	    value: function getBulbs(result) {
+	      var bulbs = [].concat(_toConsumableArray(Array(result.nCorrect).fill(_BulbTypes2.default.CORRECT)), _toConsumableArray(Array(result.nExist).fill(_BulbTypes2.default.EXISTS)), _toConsumableArray(Array(result.nIncorrect).fill(_BulbTypes2.default.INCORRECT)));
+	
+	      return bulbs.map(function (value, index) {
+	        return _react2.default.createElement(_Bulb2.default, { key: index, type: value });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var result = this.props.result || this.getDefaultResult(this.props.length);
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'mm-indicator' },
+	        this.getBulbs(result)
+	      );
+	    }
+	  }]);
+	
+	  return Indicator;
+	}(_react2.default.Component);
+	
+	exports.default = Indicator;
+
+/***/ },
+/* 202 */
+/*!***********************************************!*\
+  !*** ./src/client/app/constants/BulbTypes.js ***!
+  \***********************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var types = {
+	  CORRECT: 'i-correct',
+	  EXISTS: 'i-exists',
+	  INCORRECT: 'i-incorrect'
+	};
+	
+	exports.default = types;
+
+/***/ },
+/* 203 */
+/*!********************************************!*\
+  !*** ./src/client/app/components/Bulb.jsx ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Bulb = function (_React$Component) {
+	  _inherits(Bulb, _React$Component);
+	
+	  function Bulb() {
+	    _classCallCheck(this, Bulb);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Bulb).apply(this, arguments));
+	  }
+	
+	  _createClass(Bulb, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "bulb" },
+	        _react2.default.createElement("span", { className: this.props.type })
+	      );
+	    }
+	  }]);
+	
+	  return Bulb;
+	}(_react2.default.Component);
+	
+	exports.default = Bulb;
+
+/***/ },
+/* 204 */
 /*!***********************************************!*\
   !*** ./src/client/app/components/PegTray.jsx ***!
   \***********************************************/
@@ -23185,6 +23357,15 @@
 	
 	  _createClass(PegTray, [{
 	    key: 'renderSlots',
+	
+	    /**
+	     * Retrieves available colors on the PegTray
+	     *
+	     * @param  {int}      maxColors
+	     * @param  {function} onClickHandler
+	     *
+	     * @return {React.Component[]}
+	     */
 	    value: function renderSlots(maxColors, onClickHandler) {
 	      var slots = [];
 	      var i = void 0;
@@ -23219,7 +23400,7 @@
 	exports.default = PegTray;
 
 /***/ },
-/* 202 */
+/* 205 */
 /*!***********************************************!*\
   !*** ./src/client/app/components/Caption.jsx ***!
   \***********************************************/
@@ -23237,11 +23418,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _BulbTypes = __webpack_require__(/*! ../constants/BulbTypes */ 203);
+	var _BulbTypes = __webpack_require__(/*! ../constants/BulbTypes */ 202);
 	
 	var _BulbTypes2 = _interopRequireDefault(_BulbTypes);
 	
-	var _Bulb = __webpack_require__(/*! ./Bulb.jsx */ 204);
+	var _Bulb = __webpack_require__(/*! ./Bulb.jsx */ 203);
 	
 	var _Bulb2 = _interopRequireDefault(_Bulb);
 	
@@ -23298,79 +23479,7 @@
 	exports.default = Caption;
 
 /***/ },
-/* 203 */
-/*!***********************************************!*\
-  !*** ./src/client/app/constants/BulbTypes.js ***!
-  \***********************************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var types = {
-	  CORRECT: 'i-correct',
-	  EXISTS: 'i-exists',
-	  INCORRECT: 'i-incorrect'
-	};
-	
-	exports.default = types;
-
-/***/ },
-/* 204 */
-/*!********************************************!*\
-  !*** ./src/client/app/components/Bulb.jsx ***!
-  \********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Bulb = function (_React$Component) {
-	  _inherits(Bulb, _React$Component);
-	
-	  function Bulb() {
-	    _classCallCheck(this, Bulb);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Bulb).apply(this, arguments));
-	  }
-	
-	  _createClass(Bulb, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "bulb" },
-	        _react2.default.createElement("span", { className: this.props.type })
-	      );
-	    }
-	  }]);
-	
-	  return Bulb;
-	}(_react2.default.Component);
-	
-	exports.default = Bulb;
-
-/***/ },
-/* 205 */
+/* 206 */
 /*!**********************************************************!*\
   !*** ./src/client/app/components/modals/SolvedModal.jsx ***!
   \**********************************************************/
@@ -23382,7 +23491,7 @@
 	  value: true
 	});
 	
-	var _DefaultModal2 = __webpack_require__(/*! ./DefaultModal.jsx */ 206);
+	var _DefaultModal2 = __webpack_require__(/*! ./DefaultModal.jsx */ 207);
 	
 	var _DefaultModal3 = _interopRequireDefault(_DefaultModal2);
 	
@@ -23415,7 +23524,7 @@
 	exports.default = SolvedModal;
 
 /***/ },
-/* 206 */
+/* 207 */
 /*!***********************************************************!*\
   !*** ./src/client/app/components/modals/DefaultModal.jsx ***!
   \***********************************************************/
@@ -23433,7 +23542,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactModal = __webpack_require__(/*! react-modal */ 207);
+	var _reactModal = __webpack_require__(/*! react-modal */ 208);
 	
 	var _reactModal2 = _interopRequireDefault(_reactModal);
 	
@@ -23456,6 +23565,11 @@
 	    _this.state = { modalIsOpen: true };
 	    return _this;
 	  }
+	
+	  /**
+	   * Event handler that is fired when modal is to be closed
+	   */
+	
 	
 	  _createClass(DefaultModal, [{
 	    key: 'closeModal',
@@ -23487,18 +23601,18 @@
 	exports.default = DefaultModal;
 
 /***/ },
-/* 207 */
+/* 208 */
 /*!************************************!*\
   !*** ./~/react-modal/lib/index.js ***!
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./components/Modal */ 208);
+	module.exports = __webpack_require__(/*! ./components/Modal */ 209);
 	
 
 
 /***/ },
-/* 208 */
+/* 209 */
 /*!***********************************************!*\
   !*** ./~/react-modal/lib/components/Modal.js ***!
   \***********************************************/
@@ -23506,12 +23620,12 @@
 
 	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
-	var ExecutionEnvironment = __webpack_require__(/*! exenv */ 209);
-	var ModalPortal = React.createFactory(__webpack_require__(/*! ./ModalPortal */ 210));
-	var ariaAppHider = __webpack_require__(/*! ../helpers/ariaAppHider */ 225);
-	var elementClass = __webpack_require__(/*! element-class */ 226);
+	var ExecutionEnvironment = __webpack_require__(/*! exenv */ 210);
+	var ModalPortal = React.createFactory(__webpack_require__(/*! ./ModalPortal */ 211));
+	var ariaAppHider = __webpack_require__(/*! ../helpers/ariaAppHider */ 226);
+	var elementClass = __webpack_require__(/*! element-class */ 227);
 	var renderSubtreeIntoContainer = __webpack_require__(/*! react-dom */ 38).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(/*! lodash.assign */ 214);
+	var Assign = __webpack_require__(/*! lodash.assign */ 215);
 	
 	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -23619,7 +23733,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 3)))
 
 /***/ },
-/* 209 */
+/* 210 */
 /*!****************************************!*\
   !*** ./~/react-modal/~/exenv/index.js ***!
   \****************************************/
@@ -23667,7 +23781,7 @@
 
 
 /***/ },
-/* 210 */
+/* 211 */
 /*!*****************************************************!*\
   !*** ./~/react-modal/lib/components/ModalPortal.js ***!
   \*****************************************************/
@@ -23675,9 +23789,9 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var div = React.DOM.div;
-	var focusManager = __webpack_require__(/*! ../helpers/focusManager */ 211);
-	var scopeTab = __webpack_require__(/*! ../helpers/scopeTab */ 213);
-	var Assign = __webpack_require__(/*! lodash.assign */ 214);
+	var focusManager = __webpack_require__(/*! ../helpers/focusManager */ 212);
+	var scopeTab = __webpack_require__(/*! ../helpers/scopeTab */ 214);
+	var Assign = __webpack_require__(/*! lodash.assign */ 215);
 	
 	// so that our CSS is statically analyzable
 	var CLASS_NAMES = {
@@ -23862,13 +23976,13 @@
 
 
 /***/ },
-/* 211 */
+/* 212 */
 /*!***************************************************!*\
   !*** ./~/react-modal/lib/helpers/focusManager.js ***!
   \***************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(/*! ../helpers/tabbable */ 212);
+	var findTabbable = __webpack_require__(/*! ../helpers/tabbable */ 213);
 	var modalElement = null;
 	var focusLaterElement = null;
 	var needToFocus = false;
@@ -23939,7 +24053,7 @@
 
 
 /***/ },
-/* 212 */
+/* 213 */
 /*!***********************************************!*\
   !*** ./~/react-modal/lib/helpers/tabbable.js ***!
   \***********************************************/
@@ -23998,13 +24112,13 @@
 
 
 /***/ },
-/* 213 */
+/* 214 */
 /*!***********************************************!*\
   !*** ./~/react-modal/lib/helpers/scopeTab.js ***!
   \***********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(/*! ../helpers/tabbable */ 212);
+	var findTabbable = __webpack_require__(/*! ../helpers/tabbable */ 213);
 	
 	module.exports = function(node, event) {
 	  var tabbable = findTabbable(node);
@@ -24026,7 +24140,7 @@
 
 
 /***/ },
-/* 214 */
+/* 215 */
 /*!************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/index.js ***!
   \************************************************/
@@ -24040,9 +24154,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseAssign = __webpack_require__(/*! lodash._baseassign */ 215),
-	    createAssigner = __webpack_require__(/*! lodash._createassigner */ 221),
-	    keys = __webpack_require__(/*! lodash.keys */ 217);
+	var baseAssign = __webpack_require__(/*! lodash._baseassign */ 216),
+	    createAssigner = __webpack_require__(/*! lodash._createassigner */ 222),
+	    keys = __webpack_require__(/*! lodash.keys */ 218);
 	
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -24115,7 +24229,7 @@
 
 
 /***/ },
-/* 215 */
+/* 216 */
 /*!*********************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash._baseassign/index.js ***!
   \*********************************************************************/
@@ -24129,8 +24243,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseCopy = __webpack_require__(/*! lodash._basecopy */ 216),
-	    keys = __webpack_require__(/*! lodash.keys */ 217);
+	var baseCopy = __webpack_require__(/*! lodash._basecopy */ 217),
+	    keys = __webpack_require__(/*! lodash.keys */ 218);
 	
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -24151,7 +24265,7 @@
 
 
 /***/ },
-/* 216 */
+/* 217 */
 /*!****************************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash._baseassign/~/lodash._basecopy/index.js ***!
   \****************************************************************************************/
@@ -24192,7 +24306,7 @@
 
 
 /***/ },
-/* 217 */
+/* 218 */
 /*!**************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash.keys/index.js ***!
   \**************************************************************/
@@ -24206,9 +24320,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(/*! lodash._getnative */ 218),
-	    isArguments = __webpack_require__(/*! lodash.isarguments */ 219),
-	    isArray = __webpack_require__(/*! lodash.isarray */ 220);
+	var getNative = __webpack_require__(/*! lodash._getnative */ 219),
+	    isArguments = __webpack_require__(/*! lodash.isarguments */ 220),
+	    isArray = __webpack_require__(/*! lodash.isarray */ 221);
 	
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -24437,7 +24551,7 @@
 
 
 /***/ },
-/* 218 */
+/* 219 */
 /*!**********************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash.keys/~/lodash._getnative/index.js ***!
   \**********************************************************************************/
@@ -24583,7 +24697,7 @@
 
 
 /***/ },
-/* 219 */
+/* 220 */
 /*!***********************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash.keys/~/lodash.isarguments/index.js ***!
   \***********************************************************************************/
@@ -24835,7 +24949,7 @@
 
 
 /***/ },
-/* 220 */
+/* 221 */
 /*!*******************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash.keys/~/lodash.isarray/index.js ***!
   \*******************************************************************************/
@@ -25024,7 +25138,7 @@
 
 
 /***/ },
-/* 221 */
+/* 222 */
 /*!*************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash._createassigner/index.js ***!
   \*************************************************************************/
@@ -25038,9 +25152,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var bindCallback = __webpack_require__(/*! lodash._bindcallback */ 222),
-	    isIterateeCall = __webpack_require__(/*! lodash._isiterateecall */ 223),
-	    restParam = __webpack_require__(/*! lodash.restparam */ 224);
+	var bindCallback = __webpack_require__(/*! lodash._bindcallback */ 223),
+	    isIterateeCall = __webpack_require__(/*! lodash._isiterateecall */ 224),
+	    restParam = __webpack_require__(/*! lodash.restparam */ 225);
 	
 	/**
 	 * Creates a function that assigns properties of source object(s) to a given
@@ -25085,7 +25199,7 @@
 
 
 /***/ },
-/* 222 */
+/* 223 */
 /*!************************************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash._createassigner/~/lodash._bindcallback/index.js ***!
   \************************************************************************************************/
@@ -25159,7 +25273,7 @@
 
 
 /***/ },
-/* 223 */
+/* 224 */
 /*!**************************************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash._createassigner/~/lodash._isiterateecall/index.js ***!
   \**************************************************************************************************/
@@ -25300,7 +25414,7 @@
 
 
 /***/ },
-/* 224 */
+/* 225 */
 /*!********************************************************************************************!*\
   !*** ./~/react-modal/~/lodash.assign/~/lodash._createassigner/~/lodash.restparam/index.js ***!
   \********************************************************************************************/
@@ -25376,7 +25490,7 @@
 
 
 /***/ },
-/* 225 */
+/* 226 */
 /*!***************************************************!*\
   !*** ./~/react-modal/lib/helpers/ariaAppHider.js ***!
   \***************************************************/
@@ -25427,7 +25541,7 @@
 
 
 /***/ },
-/* 226 */
+/* 227 */
 /*!************************************************!*\
   !*** ./~/react-modal/~/element-class/index.js ***!
   \************************************************/
@@ -25495,7 +25609,7 @@
 
 
 /***/ },
-/* 227 */
+/* 228 */
 /*!********************************************************!*\
   !*** ./src/client/app/components/modals/LostModal.jsx ***!
   \********************************************************/
@@ -25507,7 +25621,7 @@
 	  value: true
 	});
 	
-	var _DefaultModal2 = __webpack_require__(/*! ./DefaultModal.jsx */ 206);
+	var _DefaultModal2 = __webpack_require__(/*! ./DefaultModal.jsx */ 207);
 	
 	var _DefaultModal3 = _interopRequireDefault(_DefaultModal2);
 	
@@ -25540,7 +25654,7 @@
 	exports.default = LostModal;
 
 /***/ },
-/* 228 */
+/* 229 */
 /*!*****************************************!*\
   !*** ./src/client/app/actions/index.js ***!
   \*****************************************/
@@ -25552,8 +25666,9 @@
 	  value: true
 	});
 	exports.play = play;
+	exports.newGame = newGame;
 	
-	var _ActionTypes = __webpack_require__(/*! ../constants/ActionTypes */ 229);
+	var _ActionTypes = __webpack_require__(/*! ../constants/ActionTypes */ 230);
 	
 	var ActionTypes = _interopRequireWildcard(_ActionTypes);
 	
@@ -25561,10 +25676,14 @@
 	
 	function play(color) {
 	  return { type: ActionTypes.PLAY, color: color };
-	}
+	};
+	
+	function newGame() {
+	  return { type: ActionTypes.NEW_GAME };
+	};
 
 /***/ },
-/* 229 */
+/* 230 */
 /*!*************************************************!*\
   !*** ./src/client/app/constants/ActionTypes.js ***!
   \*************************************************/
@@ -25576,9 +25695,10 @@
 	  value: true
 	});
 	var PLAY = exports.PLAY = 'PLAY';
+	var NEW_GAME = exports.NEW_GAME = 'NEW_GAME';
 
 /***/ },
-/* 230 */
+/* 231 */
 /*!************************************************!*\
   !*** ./src/client/app/store/configureStore.js ***!
   \************************************************/
@@ -25592,7 +25712,7 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 175);
 	
-	var _reducers = __webpack_require__(/*! ../reducers */ 231);
+	var _reducers = __webpack_require__(/*! ../reducers */ 232);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -25603,7 +25723,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 232 */
 /*!******************************************!*\
   !*** ./src/client/app/reducers/index.js ***!
   \******************************************/
@@ -25617,7 +25737,7 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 175);
 	
-	var _mastermind = __webpack_require__(/*! ./mastermind */ 232);
+	var _mastermind = __webpack_require__(/*! ./mastermind */ 233);
 	
 	var _mastermind2 = _interopRequireDefault(_mastermind);
 	
@@ -25630,7 +25750,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 232 */
+/* 233 */
 /*!***********************************************!*\
   !*** ./src/client/app/reducers/mastermind.js ***!
   \***********************************************/
@@ -25643,11 +25763,11 @@
 	});
 	exports.default = mastermind;
 	
-	var _config = __webpack_require__(/*! ../config */ 233);
+	var _config = __webpack_require__(/*! ../config */ 238);
 	
 	var _config2 = _interopRequireDefault(_config);
 	
-	var _ActionTypes = __webpack_require__(/*! ../constants/ActionTypes */ 229);
+	var _ActionTypes = __webpack_require__(/*! ../constants/ActionTypes */ 230);
 	
 	var ActionTypes = _interopRequireWildcard(_ActionTypes);
 	
@@ -25679,15 +25799,24 @@
 	  return code;
 	};
 	
-	var initialState = {
-	  config: Object.assign({}, _config2.default),
-	  activeSlot: 0,
-	  activeRow: 0,
-	  rows: [],
-	  results: [],
-	  secret: generateSecret(_config2.default.secretSize, _config2.default.availableColors),
-	  solved: false,
-	  lost: false
+	/**
+	 * Generate new game state with new random secret code
+	 *
+	 * @param  {object} config
+	 *
+	 * @return {object}
+	 */
+	var getNewGameState = function getNewGameState(config) {
+	  return {
+	    config: Object.assign({}, config),
+	    activeSlot: 0,
+	    activeRow: 0,
+	    rows: [],
+	    results: [],
+	    secret: generateSecret(config.secretSize, config.availableColors),
+	    solved: false,
+	    lost: false
+	  };
 	};
 	
 	var getNewRow = function getNewRow(length) {
@@ -25756,36 +25885,20 @@
 	 * @return {object}
 	 */
 	function mastermind() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? getNewGameState(_config2.default) : arguments[0];
 	  var action = arguments[1];
 	
-	  if (action.type === ActionTypes.PLAY) {
-	    return play(state, action);
-	  }
+	  switch (action.type) {
+	    case ActionTypes.PLAY:
+	      return play(state, action);
 	
-	  return state;
-	}
-
-/***/ },
-/* 233 */
-/*!**********************************!*\
-  !*** ./src/client/app/config.js ***!
-  \**********************************/
-/***/ function(module, exports) {
-
-	"use strict";
+	    case ActionTypes.NEW_GAME:
+	      return getNewGameState(_config2.default);
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var config = {
-	  secretSize: 4,
-	  maxRows: 10,
-	  availableColors: 6,
-	  allowRepetitions: false
+	    default:
+	      return state;
+	  };
 	};
-	
-	exports.default = config;
 
 /***/ },
 /* 234 */
@@ -25828,7 +25941,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".mastermind-game {\n  width: 258px;\n  margin: 0 auto; }\n\n.mastermind-game .mm-board {\n  margin-bottom: 15px; }\n\n.mastermind-game .mm-row, .mastermind-game .mm-peg-tray, .mastermind-game .mm-secret {\n  width: 200px;\n  height: 50px;\n  display: inline-block; }\n\n.mastermind-game .mm-peg-tray {\n  width: 250px;\n  vertical-align: middle;\n  margin-bottom: 15px; }\n  .mastermind-game .mm-peg-tray .mm-peg-wrapper {\n    width: 41.66667px;\n    height: 50px;\n    position: relative;\n    display: inline-block; }\n\n.mastermind-game .mm-secret {\n  margin-bottom: 15px; }\n  .mastermind-game .mm-secret .mm-peg-slot-outer {\n    background-color: #000; }\n\n.mastermind-game .mm-peg {\n  width: 31;\n  height: 31;\n  margin: auto;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  border-width: 2px;\n  border-color: #000;\n  border-style: solid;\n  border-radius: 50%; }\n  .mastermind-game .mm-peg-wrapper {\n    width: 50px;\n    height: 50px;\n    position: relative;\n    display: inline-block; }\n  .mastermind-game .mm-peg .active-slot {\n    width: 75%;\n    height: 75%;\n    border: 3px solid #fff;\n    border-radius: 10px;\n    margin: auto;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0; }\n\n.mastermind-game .mm-peg-slot {\n  width: 50px;\n  height: 50px;\n  position: relative;\n  display: inline-block; }\n  .mastermind-game .mm-peg-slot-inner {\n    width: 8px;\n    height: 8px;\n    left: 21px;\n    top: 21px;\n    position: absolute;\n    border-radius: 50%;\n    background-color: #000; }\n  .mastermind-game .mm-peg-slot-outer {\n    width: 20px;\n    height: 20px;\n    left: 13px;\n    top: 13px;\n    background-color: transparent;\n    position: absolute;\n    border-width: 2px;\n    border-color: #000;\n    border-style: solid;\n    border-radius: 50%; }\n  .mastermind-game .mm-peg-slot .active-slot {\n    width: 75%;\n    height: 75%;\n    border: 3px solid #fff;\n    border-radius: 10px;\n    margin: auto;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0; }\n\n.mastermind-game .bulb {\n  width: 50%;\n  height: 50%;\n  display: inline-block;\n  position: relative; }\n  .mastermind-game .bulb span {\n    margin: auto;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    border-radius: 50%;\n    line-height: 100%;\n    text-align: center; }\n\n.mastermind-game .mm-indicator {\n  width: 50px;\n  height: 50px;\n  position: relative;\n  display: inline-block; }\n\n.mastermind-game .mm-caption {\n  position: relative;\n  width: 200px;\n  height: 50px; }\n  .mastermind-game .mm-caption .caption-line {\n    height: 25px; }\n  .mastermind-game .mm-caption .bulb {\n    width: 25px;\n    height: 25px;\n    float: left; }\n    .mastermind-game .mm-caption .bulb span {\n      border: 1px #000 solid; }\n  .mastermind-game .mm-caption span {\n    line-height: 25px; }\n\n.mastermind-game.theme-default .mm-row, .mastermind-game.theme-default .mm-peg-tray, .mastermind-game.theme-default .mm-secret,\n.mastermind-game.theme-default .mm-indicator {\n  background-color: #d09b88;\n  border-width: 2px;\n  border-style: solid;\n  border-radius: 10px; }\n\n.mastermind-game.theme-default .i-incorrect {\n  background-color: #ccc;\n  width: 45%;\n  height: 45%; }\n\n.mastermind-game.theme-default .i-exists {\n  background-color: #fff;\n  width: 65%;\n  height: 65%; }\n\n.mastermind-game.theme-default .i-correct {\n  background-color: #000;\n  width: 65%;\n  height: 65%; }\n\n.mastermind-game.theme-default .color.zero {\n  background-color: #ff0; }\n\n.mastermind-game.theme-default .color.one {\n  background-color: #ffa500; }\n\n.mastermind-game.theme-default .color.two {\n  background-color: #f00; }\n\n.mastermind-game.theme-default .color.three {\n  background-color: #800080; }\n\n.mastermind-game.theme-default .color.four {\n  background-color: #00f; }\n\n.mastermind-game.theme-default .color.five {\n  background-color: #008000; }\n\n.modal-overlay {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  background-color: rgba(255, 255, 255, 0.75); }\n\n.mm-solved-modal, .mm-lost-modal {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  right: auto;\n  bottom: auto;\n  border: 1px solid #cccccc;\n  overflow: auto;\n  border-radius: 4px;\n  outline: none;\n  padding: 20px;\n  margin-right: -50%;\n  transform: translate(-50%, -50%);\n  color: #222; }\n\n.mm-solved-modal {\n  background-color: #df0; }\n\n.mm-lost-modal {\n  background-color: #d16868; }\n", ""]);
+	exports.push([module.id, ".mastermind-game {\n  width: 258px;\n  margin: 0 auto; }\n\n.mastermind-game .mm-board {\n  margin-bottom: 15px; }\n\n.mastermind-game .mm-row, .mastermind-game .mm-peg-tray, .mastermind-game .mm-secret {\n  width: 200px;\n  height: 50px;\n  display: inline-block; }\n\n.mastermind-game .mm-peg-tray {\n  width: 250px;\n  vertical-align: middle;\n  margin-bottom: 15px; }\n  .mastermind-game .mm-peg-tray .mm-peg-wrapper {\n    width: 41.66667px;\n    height: 50px;\n    position: relative;\n    display: inline-block; }\n\n.mastermind-game .mm-secret {\n  margin-bottom: 15px; }\n  .mastermind-game .mm-secret .mm-peg-slot-outer {\n    background-color: #000; }\n\n.mastermind-game .mm-peg {\n  width: 31;\n  height: 31;\n  margin: auto;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  border-width: 2px;\n  border-color: #000;\n  border-style: solid;\n  border-radius: 50%; }\n  .mastermind-game .mm-peg-wrapper {\n    width: 50px;\n    height: 50px;\n    position: relative;\n    display: inline-block; }\n  .mastermind-game .mm-peg .active-slot {\n    width: 75%;\n    height: 75%;\n    border: 3px solid #fff;\n    border-radius: 10px;\n    margin: auto;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0; }\n\n.mastermind-game .mm-peg-slot {\n  width: 50px;\n  height: 50px;\n  position: relative;\n  display: inline-block; }\n  .mastermind-game .mm-peg-slot-inner {\n    width: 8px;\n    height: 8px;\n    left: 21px;\n    top: 21px;\n    position: absolute;\n    border-radius: 50%;\n    background-color: #000; }\n  .mastermind-game .mm-peg-slot-outer {\n    width: 20px;\n    height: 20px;\n    left: 13px;\n    top: 13px;\n    background-color: transparent;\n    position: absolute;\n    border-width: 2px;\n    border-color: #000;\n    border-style: solid;\n    border-radius: 50%; }\n  .mastermind-game .mm-peg-slot .active-slot {\n    width: 75%;\n    height: 75%;\n    border: 3px solid #fff;\n    border-radius: 10px;\n    margin: auto;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0; }\n\n.mastermind-game .bulb {\n  width: 50%;\n  height: 50%;\n  display: inline-block;\n  position: relative; }\n  .mastermind-game .bulb span {\n    margin: auto;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    border-radius: 50%;\n    line-height: 100%;\n    text-align: center; }\n\n.mastermind-game .mm-indicator {\n  width: 50px;\n  height: 50px;\n  position: relative;\n  display: inline-block; }\n\n.mastermind-game .mm-caption {\n  position: relative;\n  width: 200px;\n  height: 50px;\n  margin-top: 10px; }\n  .mastermind-game .mm-caption .caption-line {\n    height: 25px; }\n  .mastermind-game .mm-caption .bulb {\n    width: 25px;\n    height: 25px;\n    float: left; }\n    .mastermind-game .mm-caption .bulb span {\n      border: 1px #000 solid; }\n  .mastermind-game .mm-caption span {\n    line-height: 25px; }\n\n.mastermind-game.theme-default .mm-row, .mastermind-game.theme-default .mm-peg-tray, .mastermind-game.theme-default .mm-secret,\n.mastermind-game.theme-default .mm-indicator {\n  background-color: #d09b88;\n  border-width: 2px;\n  border-style: solid;\n  border-radius: 10px; }\n\n.mastermind-game.theme-default .i-incorrect {\n  background-color: #ccc;\n  width: 45%;\n  height: 45%; }\n\n.mastermind-game.theme-default .i-exists {\n  background-color: #fff;\n  width: 65%;\n  height: 65%; }\n\n.mastermind-game.theme-default .i-correct {\n  background-color: #000;\n  width: 65%;\n  height: 65%; }\n\n.mastermind-game.theme-default .color.zero {\n  background-color: #ff0; }\n\n.mastermind-game.theme-default .color.one {\n  background-color: #ffa500; }\n\n.mastermind-game.theme-default .color.two {\n  background-color: #f00; }\n\n.mastermind-game.theme-default .color.three {\n  background-color: #800080; }\n\n.mastermind-game.theme-default .color.four {\n  background-color: #00f; }\n\n.mastermind-game.theme-default .color.five {\n  background-color: #008000; }\n\n.modal-overlay {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  bottom: 0px;\n  background-color: rgba(255, 255, 255, 0.75); }\n\n.mm-solved-modal, .mm-lost-modal {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  right: auto;\n  bottom: auto;\n  border: 1px solid #cccccc;\n  overflow: auto;\n  border-radius: 4px;\n  outline: none;\n  padding: 20px;\n  margin-right: -50%;\n  transform: translate(-50%, -50%);\n  color: #222; }\n\n.mm-solved-modal {\n  background-color: #df0; }\n\n.mm-lost-modal {\n  background-color: #d16868; }\n", ""]);
 	
 	// exports
 
@@ -26149,88 +26262,24 @@
 
 /***/ },
 /* 238 */
-/*!*************************************************!*\
-  !*** ./src/client/app/components/Indicator.jsx ***!
-  \*************************************************/
-/***/ function(module, exports, __webpack_require__) {
+/*!**********************************!*\
+  !*** ./src/client/app/config.js ***!
+  \**********************************/
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	var config = {
+	  secretSize: 4,
+	  maxRows: 10,
+	  availableColors: 6,
+	  allowRepetitions: false
+	};
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _BulbTypes = __webpack_require__(/*! ../constants/BulbTypes */ 203);
-	
-	var _BulbTypes2 = _interopRequireDefault(_BulbTypes);
-	
-	var _Bulb = __webpack_require__(/*! ./Bulb.jsx */ 204);
-	
-	var _Bulb2 = _interopRequireDefault(_Bulb);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Indicator = function (_React$Component) {
-	  _inherits(Indicator, _React$Component);
-	
-	  function Indicator() {
-	    _classCallCheck(this, Indicator);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Indicator).apply(this, arguments));
-	  }
-	
-	  _createClass(Indicator, [{
-	    key: 'getDefaultResult',
-	
-	    /**
-	     * Returns default Result object
-	     *
-	     * @param  {int} length
-	     *
-	     * @return {object}
-	     */
-	    value: function getDefaultResult(length) {
-	      return { nCorrect: 0, nExist: 0, nIncorrect: length };
-	    }
-	  }, {
-	    key: 'getBulbs',
-	    value: function getBulbs(result) {
-	      var bulbs = [].concat(_toConsumableArray(Array(result.nCorrect).fill(_BulbTypes2.default.CORRECT)), _toConsumableArray(Array(result.nExist).fill(_BulbTypes2.default.EXISTS)), _toConsumableArray(Array(result.nIncorrect).fill(_BulbTypes2.default.INCORRECT)));
-	
-	      return bulbs.map(function (value, index) {
-	        return _react2.default.createElement(_Bulb2.default, { key: index, type: value });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var result = this.props.result || this.getDefaultResult(this.props.length);
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'mm-indicator' },
-	        this.getBulbs(result)
-	      );
-	    }
-	  }]);
-	
-	  return Indicator;
-	}(_react2.default.Component);
-	
-	exports.default = Indicator;
+	exports.default = config;
 
 /***/ }
 /******/ ]);
