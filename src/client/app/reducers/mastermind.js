@@ -98,9 +98,14 @@ const play = (state, action) => {
  * @return {object}
  */
 export default function mastermind(state = initialState, action) {
-  if (action.type === ActionTypes.PLAY) {
-    return play(state, action);
-  }
+  switch (action.type) {
+    case ActionTypes.PLAY:
+      return play(state, action);
 
-  return state;
-}
+    case ActionTypes.NEW_GAME:
+      return initialState;
+
+    default:
+      return state;
+  };
+};
