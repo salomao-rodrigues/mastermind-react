@@ -4,6 +4,13 @@ import Row from './Row.jsx';
 import Indicator from './Indicator.jsx';
 
 class Board extends React.Component {
+  /**
+   * Loop through rows and renders them together with Indicators
+   *
+   * @param  {object} props
+   *
+   * @return {React.Component[]}
+   */
   renderCodeRows(props) {
     const { config, rows, secret, activeRow, activeSlot, results } = props;
     let i, boardRows = [];

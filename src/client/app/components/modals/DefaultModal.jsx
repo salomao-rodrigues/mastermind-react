@@ -8,6 +8,9 @@ class DefaultModal extends React.Component {
     this.state = { modalIsOpen: true };
   }
 
+  /**
+   * Event handler that is fired when modal is to be closed
+   */
   closeModal() {
     this.setState({modalIsOpen: false});
   }
