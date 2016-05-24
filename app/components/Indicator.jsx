@@ -15,6 +15,13 @@ class Indicator extends React.Component {
     return { nCorrect: 0, nExist: 0, nIncorrect: length };
   }
 
+  /**
+   * Retrieves Bulbs to be displayed in Indicator
+   *
+   * @param  {object} result Describes the result of a play
+   *
+   * @return {React.Component[]}
+   */
   getBulbs(result) {
     const bulbs = [
       ...Array(result.nCorrect).fill(BulbTypes.CORRECT),
