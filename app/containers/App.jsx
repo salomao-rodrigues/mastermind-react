@@ -32,6 +32,7 @@ class App extends React.Component {
         <Secret slots={game.secret} revealed={revealed} />
         <Board {...game} />
         <PegTray maxColors={game.config.availableColors} {...(revealed || actions)} />
+        <button onClick={actions.newGame}>New game</button>
         {revealed && this.renderModal(game.solved)}
         <Caption />
       </div>
