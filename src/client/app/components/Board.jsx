@@ -5,7 +5,7 @@ import Indicator from './Indicator.jsx';
 
 class Board extends React.Component {
   renderCodeRows(props) {
-    const {config, rows, secret, activeRow, activeSlot, results} = props;
+    const { config, rows, secret, activeRow, activeSlot, results } = props;
     let i, boardRows = [];
 
     for (i = config.maxRows - 1; i >= 0; i -= 1) {

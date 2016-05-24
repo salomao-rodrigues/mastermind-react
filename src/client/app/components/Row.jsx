@@ -10,7 +10,7 @@ class Row extends React.Component {
    * @return {React.Component[]} The Pegs PegSlots
    */
   renderSlots(props) {
-    const { activeSlot, className, length } = props;
+    const { activeSlot, length } = props;
     const slots = props.slots || Array(length).fill(null);
 
     return slots.map((color, index) => {
