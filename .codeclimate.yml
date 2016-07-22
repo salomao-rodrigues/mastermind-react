@@ -1,0 +1,4 @@
+## other configuration excluded from example...
+exclude_paths:
+- "src/client/public/bundle.js"
+- "src/client/public/bundle.js.map"

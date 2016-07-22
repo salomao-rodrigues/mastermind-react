@@ -116,5 +116,5 @@ export default function mastermind(state = getNewGameState(config), action) {
 
     default:
       return state;
-  };
-};
+  }
+}
