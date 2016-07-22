@@ -21,8 +21,6 @@ ratings:
   - "**.php"
   - "**.py"
   - "**.rb"
-exclude_paths: []
-## other configuration excluded from example...
-exclude_paths:
+exclude_paths: 
 - "src/client/public/bundle.js"
 - "src/client/public/bundle.js.map"
