@@ -7,5 +7,3 @@ ReactDOM.render(
   <App title="Mastermind React Reborn!"/>,
   document.getElementById('app')
 );
-
-module.hot.accept();
