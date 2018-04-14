@@ -9,12 +9,12 @@
   "scripts": {
     "build": "webpack --mode=production",
     "start": "webpack-dev-server --mode=development",
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && yarn test",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "*.js": "eslint"
   },
   "jest": {
     "setupFiles": [
