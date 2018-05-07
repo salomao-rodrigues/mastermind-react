@@ -1,13 +1,13 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { shallow } from 'enzyme';
 
 import App from './App';
 
 describe('App', () => {
-  it('renders a title', () => {
-    const title = 'The title';
-    const component = shallow(<App title={ title } />);
+  it('renders a Router', () => {
+    const component = shallow(<App/>);
 
-    expect(component.text()).toBe(title);
+    expect(component.type()).toBe(BrowserRouter);
   });
 });

@@ -1,13 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 
-const App = ({ title }) => (
-  <div>{title}</div>
+import MainMenu from './menus/MainMenu';
+import Solo from './pages/Solo';
+
+const App = () => (
+  <Router>
+    <Switch>
+      <Route exact path="/" component={ MainMenu } />
+      <Route path="/solo" component={ Solo } />
+      <Route path="/vs-friends" component={ MainMenu } />
+      <Route path="/rules" component={ MainMenu } />
+    </Switch>
+  </Router>
 );
 
-App.propTypes = {
-  title: PropTypes.string.isRequired
-};
-
-export default hot(module)(App)
+export default hot(module)(App);
